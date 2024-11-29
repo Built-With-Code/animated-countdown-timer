@@ -1,6 +1,5 @@
 "use client";
 
-import AnimatedCount from "@/components/AnimatedCount";
 import { Button } from "@/components/ui/button";
 import {
   Card,
@@ -11,7 +10,6 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Slider } from "@/components/ui/slider";
-import { motion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 export default function Home() {
@@ -36,15 +34,7 @@ export default function Home() {
   return (
     <div className="flex flex-col justify-center items-center min-h-screen p-8 pb-20 gap-16 sm:p-20 font-[family-name:var(--font-geist-sans)]">
       {/* Countdown Timer */}
-      <motion.div
-        animate={{
-          rotate:
-            secondsRemaining == 0
-              ? [0, 5, -5, 5, -2.5, 2.5, -1.25, 1.25, 0]
-              : [0],
-        }}
-        transition={{ delay: 1, repeat: Infinity, repeatDelay: 1 }}
-      >
+      <div>
         <Card className="w-[350px]">
           <CardHeader>
             <CardTitle>Countdown Timer</CardTitle>
@@ -52,9 +42,9 @@ export default function Home() {
           </CardHeader>
           <CardContent>
             <div className="text-3xl">
-              <AnimatedCount value={Math.floor(secondsRemaining / 60)} />
+              <span>{Math.floor(secondsRemaining / 60)}</span>
               <span>:</span>
-              <AnimatedCount value={secondsRemaining % 60} />
+              <span>{(secondsRemaining % 60).toString().padStart(2, "0")}</span>
             </div>
           </CardContent>
           <CardFooter className="flex gap-4">
@@ -69,7 +59,7 @@ export default function Home() {
             </Button>
           </CardFooter>
         </Card>
-      </motion.div>
+      </div>
 
       {/* Rating Slider */}
       <Card className="w-[350px]">
@@ -79,7 +69,7 @@ export default function Home() {
         </CardHeader>
         <CardContent>
           <div className="text-3xl flex items-baseline gap-1.5">
-            <AnimatedCount value={sliderValue} padding={0} duration={0.3} />
+            <span>{sliderValue}</span>
             <span className="text-sm font-medium leading-none text-inherit">
               / 5
             </span>
